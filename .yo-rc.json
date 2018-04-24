@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.antonybaasan.justraduire",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "4.14.3",
+    "baseName": "justraduire",
+    "packageName": "com.antonybaasan.justraduire",
+    "packageFolder": "com/antonybaasan/justraduire",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSocialSignIn": true,
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "d2031273b093e9239dbf441d3c844014f31d9c3d",
+    "clientFramework": "angularX",
+    "useSass": false,
+    "clientPackageManager": "yarn",
+    "applicationType": "monolith",
+    "testFrameworks": [
+      "protractor"
+    ],
+    "jhiPrefix": "jhi",
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en",
+      "fr"
+    ]
+  }
+}

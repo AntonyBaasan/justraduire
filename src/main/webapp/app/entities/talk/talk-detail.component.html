@@ -1,0 +1,54 @@
+
+<div *ngIf="talk">
+    <h2><span jhiTranslate="justraduireApp.talk.detail.title">Talk</span> {{talk.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="justraduireApp.talk.text">Text</span></dt>
+        <dd>
+            <span>{{talk.text}}</span>
+        </dd>
+        <dt><span jhiTranslate="justraduireApp.talk.language">Language</span></dt>
+        <dd>
+            <span jhiTranslate="{{'justraduireApp.Language.' + talk.language}}">{{talk.language}}</span>
+        </dd>
+        <dt><span jhiTranslate="justraduireApp.talk.date">Date</span></dt>
+        <dd>
+            <span>{{talk.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="justraduireApp.talk.serverDate">Server Date</span></dt>
+        <dd>
+            <span>{{talk.serverDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="justraduireApp.talk.type">Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'justraduireApp.TalkType.' + talk.type}}">{{talk.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="justraduireApp.talk.conversation">Conversation</span></dt>
+        <dd>
+            <div *ngIf="talk.conversation">
+                <a [routerLink]="['/conversation', talk.conversation?.id]">{{talk.conversation?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="justraduireApp.talk.translation">Translation</span></dt>
+        <dd>
+            <div *ngIf="talk.translation">
+                <a [routerLink]="['/talk', talk.translation?.id]">{{talk.translation?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'talk/'+ talk.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

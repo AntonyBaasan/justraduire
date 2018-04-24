@@ -1,0 +1,28 @@
+
+{
+    "justraduireApp": {
+        "talk" : {
+            "home": {
+                "title": "Talks",
+                "createLabel": "Créer un nouveau Talk",
+                "createOrEditLabel": "Créer ou éditer un Talk"
+            },
+            "created": "Un nouveau Talk a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Talk avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Talk avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Talk {{ id }} ?"
+            },
+            "detail": {
+                "title": "Talk"
+            },
+            "text": "Text",
+            "language": "Language",
+            "date": "Date",
+            "serverDate": "Server Date",
+            "type": "Type",
+            "conversation": "Conversation",
+            "translation": "Translation"
+        }
+    }
+}

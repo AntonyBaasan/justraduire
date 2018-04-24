@@ -1,0 +1,9 @@
+{
+    "justraduireApp": {
+        "TalkType" : {
+            "null": "",
+            "SPEECH": "SPEECH",
+            "TRANSLATION": "TRANSLATION"
+        }
+    }
+}

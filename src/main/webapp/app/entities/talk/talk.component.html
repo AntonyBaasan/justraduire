@@ -1,0 +1,78 @@
+<div>
+    <h2>
+        <span jhiTranslate="justraduireApp.talk.home.title">Talks</span>
+        <button class="btn btn-primary float-right jh-create-entity create-talk" [routerLink]="['/', { outlets: { popup: ['talk-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="justraduireApp.talk.home.createLabel">
+            Create new Talk
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="talks">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.text">Text</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.language">Language</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.date">Date</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.serverDate">Server Date</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.type">Type</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.conversation">Conversation</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.translation">Translation</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let talk of talks ;trackBy: trackId">
+                <td><a [routerLink]="['../talk', talk.id ]">{{talk.id}}</a></td>
+                <td>{{talk.text}}</td>
+                <td jhiTranslate="{{'justraduireApp.Language.' + talk.language}}">{{talk.language}}</td>
+                <td>{{talk.date | date:'mediumDate'}}</td>
+                <td>{{talk.serverDate | date:'mediumDate'}}</td>
+                <td jhiTranslate="{{'justraduireApp.TalkType.' + talk.type}}">{{talk.type}}</td>
+                <td>
+                    <div *ngIf="talk.conversation">
+                        <a [routerLink]="['../conversation', talk.conversation?.id ]" >{{talk.conversation?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="talk.translation">
+                        <a [routerLink]="['../talk', talk.translation?.id ]" >{{talk.translation?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../talk', talk.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'talk/'+ talk.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'talk/'+ talk.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

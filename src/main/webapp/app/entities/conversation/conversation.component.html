@@ -1,0 +1,62 @@
+<div>
+    <h2>
+        <span jhiTranslate="justraduireApp.conversation.home.title">Conversations</span>
+        <button class="btn btn-primary float-right jh-create-entity create-conversation" [routerLink]="['/', { outlets: { popup: ['conversation-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="justraduireApp.conversation.home.createLabel">
+            Create new Conversation
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="conversations">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="justraduireApp.conversation.location">Location</span></th>
+            <th><span jhiTranslate="justraduireApp.conversation.date">Date</span></th>
+            <th><span jhiTranslate="justraduireApp.conversation.userLogin">User Login</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let conversation of conversations ;trackBy: trackId">
+                <td><a [routerLink]="['../conversation', conversation.id ]">{{conversation.id}}</a></td>
+                <td>{{conversation.location}}</td>
+                <td>{{conversation.date | date:'mediumDate'}}</td>
+                <td>{{conversation.userLogin}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../conversation', conversation.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'conversation/'+ conversation.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'conversation/'+ conversation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

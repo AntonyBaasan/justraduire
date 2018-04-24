@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "talks",
+            "otherEntityName": "talk",
+            "otherEntityRelationshipName": "conversation"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "userLogin",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180424204117",
+    "entityTableName": "conversation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

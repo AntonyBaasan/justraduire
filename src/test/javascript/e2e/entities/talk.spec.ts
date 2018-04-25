@@ -36,6 +36,7 @@ describe('Talk e2e test', () => {
         talkDialogPage.setTextInput('text');
         expect(talkDialogPage.getTextInput()).toMatch('text');
         talkDialogPage.languageSelectLastOption();
+        talkDialogPage.toLanguageSelectLastOption();
         talkDialogPage.setDateInput('2000-12-31');
         expect(talkDialogPage.getDateInput()).toMatch('2000-12-31');
         talkDialogPage.setServerDateInput('2000-12-31');
@@ -71,6 +72,7 @@ export class TalkDialogPage {
     closeButton = element(by.css('button.close'));
     textInput = element(by.css('input#field_text'));
     languageSelect = element(by.css('select#field_language'));
+    toLanguageSelect = element(by.css('select#field_toLanguage'));
     dateInput = element(by.css('input#field_date'));
     serverDateInput = element(by.css('input#field_serverDate'));
     typeSelect = element(by.css('select#field_type'));
@@ -99,6 +101,17 @@ export class TalkDialogPage {
 
     languageSelectLastOption = function() {
         this.languageSelect.all(by.tagName('option')).last().click();
+    };
+    setToLanguageSelect = function(toLanguage) {
+        this.toLanguageSelect.sendKeys(toLanguage);
+    };
+
+    getToLanguageSelect = function() {
+        return this.toLanguageSelect.element(by.css('option:checked')).getText();
+    };
+
+    toLanguageSelectLastOption = function() {
+        this.toLanguageSelect.all(by.tagName('option')).last().click();
     };
     setDateInput = function(date) {
         this.dateInput.sendKeys(date);

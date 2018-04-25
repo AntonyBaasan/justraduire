@@ -15,6 +15,7 @@ export class Talk implements BaseEntity {
         public id?: number,
         public text?: string,
         public language?: Language,
+        public toLanguage?: Language,
         public date?: any,
         public serverDate?: any,
         public type?: TalkType,

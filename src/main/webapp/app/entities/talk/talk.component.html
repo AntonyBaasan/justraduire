@@ -19,6 +19,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="justraduireApp.talk.text">Text</span></th>
             <th><span jhiTranslate="justraduireApp.talk.language">Language</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.toLanguage">To Language</span></th>
             <th><span jhiTranslate="justraduireApp.talk.date">Date</span></th>
             <th><span jhiTranslate="justraduireApp.talk.serverDate">Server Date</span></th>
             <th><span jhiTranslate="justraduireApp.talk.type">Type</span></th>
@@ -32,6 +33,7 @@
                 <td><a [routerLink]="['../talk', talk.id ]">{{talk.id}}</a></td>
                 <td>{{talk.text}}</td>
                 <td jhiTranslate="{{'justraduireApp.Language.' + talk.language}}">{{talk.language}}</td>
+                <td jhiTranslate="{{'justraduireApp.Language.' + talk.toLanguage}}">{{talk.toLanguage}}</td>
                 <td>{{talk.date | date:'mediumDate'}}</td>
                 <td>{{talk.serverDate | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'justraduireApp.TalkType.' + talk.type}}">{{talk.type}}</td>

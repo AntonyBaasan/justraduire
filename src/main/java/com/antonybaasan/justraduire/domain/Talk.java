@@ -32,6 +32,10 @@ public class Talk implements Serializable {
     @Column(name = "language")
     private Language language;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "to_language")
+    private Language toLanguage;
+
     @Column(name = "jhi_date")
     private LocalDate date;
 
@@ -82,6 +86,19 @@ public class Talk implements Serializable {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public Language getToLanguage() {
+        return toLanguage;
+    }
+
+    public Talk toLanguage(Language toLanguage) {
+        this.toLanguage = toLanguage;
+        return this;
+    }
+
+    public void setToLanguage(Language toLanguage) {
+        this.toLanguage = toLanguage;
     }
 
     public LocalDate getDate() {
@@ -176,6 +193,7 @@ public class Talk implements Serializable {
             "id=" + getId() +
             ", text='" + getText() + "'" +
             ", language='" + getLanguage() + "'" +
+            ", toLanguage='" + getToLanguage() + "'" +
             ", date='" + getDate() + "'" +
             ", serverDate='" + getServerDate() + "'" +
             ", type='" + getType() + "'" +

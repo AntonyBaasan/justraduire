@@ -27,6 +27,11 @@
             "fieldValues": "FRENCH,ENGLISH"
         },
         {
+            "fieldName": "toLanguage",
+            "fieldType": "Language",
+            "fieldValues": "FRENCH,ENGLISH"
+        },
+        {
             "fieldName": "date",
             "fieldType": "LocalDate"
         },

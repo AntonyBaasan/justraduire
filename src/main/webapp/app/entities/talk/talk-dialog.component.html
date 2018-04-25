@@ -25,6 +25,13 @@
             </select>
         </div>
         <div class="form-group">
+            <label class="form-control-label" jhiTranslate="justraduireApp.talk.toLanguage" for="field_toLanguage">To Language</label>
+            <select class="form-control" name="toLanguage" [(ngModel)]="talk.toLanguage" id="field_toLanguage" >
+                <option value="FRENCH">{{'justraduireApp.Language.FRENCH' | translate}}</option>
+                <option value="ENGLISH">{{'justraduireApp.Language.ENGLISH' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label class="form-control-label" jhiTranslate="justraduireApp.talk.date" for="field_date">Date</label>
             <div class="input-group">
                 <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker  #dateDp="ngbDatepicker" [(ngModel)]="talk.date"

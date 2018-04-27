@@ -2,3 +2,10 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~font-awesome/css/font-awesome.css';
 
+/* instructions
+https://stackoverflow.com/questions/44909918/how-to-add-angular-material-design-to-jhipster?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+https://material.angular.io/guide/getting-started
+*/
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+

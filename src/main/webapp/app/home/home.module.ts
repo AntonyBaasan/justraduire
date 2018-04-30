@@ -5,6 +5,8 @@ import { JustraduireSharedModule } from '../shared';
 
 import { HOME_ROUTE, HomeComponent } from './';
 
+import { TranslatorComponent } from '../translator';
+
 @NgModule({
     imports: [
         JustraduireSharedModule,
@@ -12,6 +14,7 @@ import { HOME_ROUTE, HomeComponent } from './';
     ],
     declarations: [
         HomeComponent,
+        TranslatorComponent,
     ],
     entryComponents: [
     ],

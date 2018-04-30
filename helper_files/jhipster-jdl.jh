@@ -1,0 +1,27 @@
+entity Conversation {
+	location String,
+    date LocalDate,
+    userLogin String,
+}
+
+entity Talk {
+	sourceText String,
+	targetText String,
+    sourceLanguage Language,
+    targetLanguage Language,
+    date LocalDate,
+    serverDate LocalDate,
+    type TalkType
+}
+
+enum Language {
+    FRENCH, ENGLISH
+}
+
+enum TalkType {
+    SPEECH, TRANSLATION
+}
+
+relationship OneToMany {
+	Conversation{talks} to Talk
+}

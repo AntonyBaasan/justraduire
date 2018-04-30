@@ -43,14 +43,17 @@ import com.antonybaasan.justraduire.domain.enumeration.TalkType;
 @SpringBootTest(classes = JustraduireApp.class)
 public class TalkResourceIntTest {
 
-    private static final String DEFAULT_TEXT = "AAAAAAAAAA";
-    private static final String UPDATED_TEXT = "BBBBBBBBBB";
+    private static final String DEFAULT_SOURCE_TEXT = "AAAAAAAAAA";
+    private static final String UPDATED_SOURCE_TEXT = "BBBBBBBBBB";
 
-    private static final Language DEFAULT_LANGUAGE = Language.FRENCH;
-    private static final Language UPDATED_LANGUAGE = Language.ENGLISH;
+    private static final String DEFAULT_TARGET_TEXT = "AAAAAAAAAA";
+    private static final String UPDATED_TARGET_TEXT = "BBBBBBBBBB";
 
-    private static final Language DEFAULT_TO_LANGUAGE = Language.FRENCH;
-    private static final Language UPDATED_TO_LANGUAGE = Language.ENGLISH;
+    private static final Language DEFAULT_SOURCE_LANGUAGE = Language.FRENCH;
+    private static final Language UPDATED_SOURCE_LANGUAGE = Language.ENGLISH;
+
+    private static final Language DEFAULT_TARGET_LANGUAGE = Language.FRENCH;
+    private static final Language UPDATED_TARGET_LANGUAGE = Language.ENGLISH;
 
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -99,9 +102,10 @@ public class TalkResourceIntTest {
      */
     public static Talk createEntity(EntityManager em) {
         Talk talk = new Talk()
-            .text(DEFAULT_TEXT)
-            .language(DEFAULT_LANGUAGE)
-            .toLanguage(DEFAULT_TO_LANGUAGE)
+            .sourceText(DEFAULT_SOURCE_TEXT)
+            .targetText(DEFAULT_TARGET_TEXT)
+            .sourceLanguage(DEFAULT_SOURCE_LANGUAGE)
+            .targetLanguage(DEFAULT_TARGET_LANGUAGE)
             .date(DEFAULT_DATE)
             .serverDate(DEFAULT_SERVER_DATE)
             .type(DEFAULT_TYPE);
@@ -128,9 +132,10 @@ public class TalkResourceIntTest {
         List<Talk> talkList = talkRepository.findAll();
         assertThat(talkList).hasSize(databaseSizeBeforeCreate + 1);
         Talk testTalk = talkList.get(talkList.size() - 1);
-        assertThat(testTalk.getText()).isEqualTo(DEFAULT_TEXT);
-        assertThat(testTalk.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
-        assertThat(testTalk.getToLanguage()).isEqualTo(DEFAULT_TO_LANGUAGE);
+        assertThat(testTalk.getSourceText()).isEqualTo(DEFAULT_SOURCE_TEXT);
+        assertThat(testTalk.getTargetText()).isEqualTo(DEFAULT_TARGET_TEXT);
+        assertThat(testTalk.getSourceLanguage()).isEqualTo(DEFAULT_SOURCE_LANGUAGE);
+        assertThat(testTalk.getTargetLanguage()).isEqualTo(DEFAULT_TARGET_LANGUAGE);
         assertThat(testTalk.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testTalk.getServerDate()).isEqualTo(DEFAULT_SERVER_DATE);
         assertThat(testTalk.getType()).isEqualTo(DEFAULT_TYPE);
@@ -166,9 +171,10 @@ public class TalkResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(talk.getId().intValue())))
-            .andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT.toString())))
-            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())))
-            .andExpect(jsonPath("$.[*].toLanguage").value(hasItem(DEFAULT_TO_LANGUAGE.toString())))
+            .andExpect(jsonPath("$.[*].sourceText").value(hasItem(DEFAULT_SOURCE_TEXT.toString())))
+            .andExpect(jsonPath("$.[*].targetText").value(hasItem(DEFAULT_TARGET_TEXT.toString())))
+            .andExpect(jsonPath("$.[*].sourceLanguage").value(hasItem(DEFAULT_SOURCE_LANGUAGE.toString())))
+            .andExpect(jsonPath("$.[*].targetLanguage").value(hasItem(DEFAULT_TARGET_LANGUAGE.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].serverDate").value(hasItem(DEFAULT_SERVER_DATE.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
@@ -185,9 +191,10 @@ public class TalkResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(talk.getId().intValue()))
-            .andExpect(jsonPath("$.text").value(DEFAULT_TEXT.toString()))
-            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()))
-            .andExpect(jsonPath("$.toLanguage").value(DEFAULT_TO_LANGUAGE.toString()))
+            .andExpect(jsonPath("$.sourceText").value(DEFAULT_SOURCE_TEXT.toString()))
+            .andExpect(jsonPath("$.targetText").value(DEFAULT_TARGET_TEXT.toString()))
+            .andExpect(jsonPath("$.sourceLanguage").value(DEFAULT_SOURCE_LANGUAGE.toString()))
+            .andExpect(jsonPath("$.targetLanguage").value(DEFAULT_TARGET_LANGUAGE.toString()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.serverDate").value(DEFAULT_SERVER_DATE.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
@@ -213,9 +220,10 @@ public class TalkResourceIntTest {
         // Disconnect from session so that the updates on updatedTalk are not directly saved in db
         em.detach(updatedTalk);
         updatedTalk
-            .text(UPDATED_TEXT)
-            .language(UPDATED_LANGUAGE)
-            .toLanguage(UPDATED_TO_LANGUAGE)
+            .sourceText(UPDATED_SOURCE_TEXT)
+            .targetText(UPDATED_TARGET_TEXT)
+            .sourceLanguage(UPDATED_SOURCE_LANGUAGE)
+            .targetLanguage(UPDATED_TARGET_LANGUAGE)
             .date(UPDATED_DATE)
             .serverDate(UPDATED_SERVER_DATE)
             .type(UPDATED_TYPE);
@@ -229,9 +237,10 @@ public class TalkResourceIntTest {
         List<Talk> talkList = talkRepository.findAll();
         assertThat(talkList).hasSize(databaseSizeBeforeUpdate);
         Talk testTalk = talkList.get(talkList.size() - 1);
-        assertThat(testTalk.getText()).isEqualTo(UPDATED_TEXT);
-        assertThat(testTalk.getLanguage()).isEqualTo(UPDATED_LANGUAGE);
-        assertThat(testTalk.getToLanguage()).isEqualTo(UPDATED_TO_LANGUAGE);
+        assertThat(testTalk.getSourceText()).isEqualTo(UPDATED_SOURCE_TEXT);
+        assertThat(testTalk.getTargetText()).isEqualTo(UPDATED_TARGET_TEXT);
+        assertThat(testTalk.getSourceLanguage()).isEqualTo(UPDATED_SOURCE_LANGUAGE);
+        assertThat(testTalk.getTargetLanguage()).isEqualTo(UPDATED_TARGET_LANGUAGE);
         assertThat(testTalk.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testTalk.getServerDate()).isEqualTo(UPDATED_SERVER_DATE);
         assertThat(testTalk.getType()).isEqualTo(UPDATED_TYPE);

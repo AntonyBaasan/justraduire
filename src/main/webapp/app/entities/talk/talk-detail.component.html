@@ -4,17 +4,21 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="justraduireApp.talk.text">Text</span></dt>
+        <dt><span jhiTranslate="justraduireApp.talk.sourceText">Source Text</span></dt>
         <dd>
-            <span>{{talk.text}}</span>
+            <span>{{talk.sourceText}}</span>
         </dd>
-        <dt><span jhiTranslate="justraduireApp.talk.language">Language</span></dt>
+        <dt><span jhiTranslate="justraduireApp.talk.targetText">Target Text</span></dt>
         <dd>
-            <span jhiTranslate="{{'justraduireApp.Language.' + talk.language}}">{{talk.language}}</span>
+            <span>{{talk.targetText}}</span>
         </dd>
-        <dt><span jhiTranslate="justraduireApp.talk.toLanguage">To Language</span></dt>
+        <dt><span jhiTranslate="justraduireApp.talk.sourceLanguage">Source Language</span></dt>
         <dd>
-            <span jhiTranslate="{{'justraduireApp.Language.' + talk.toLanguage}}">{{talk.toLanguage}}</span>
+            <span jhiTranslate="{{'justraduireApp.Language.' + talk.sourceLanguage}}">{{talk.sourceLanguage}}</span>
+        </dd>
+        <dt><span jhiTranslate="justraduireApp.talk.targetLanguage">Target Language</span></dt>
+        <dd>
+            <span jhiTranslate="{{'justraduireApp.Language.' + talk.targetLanguage}}">{{talk.targetLanguage}}</span>
         </dd>
         <dt><span jhiTranslate="justraduireApp.talk.date">Date</span></dt>
         <dd>
@@ -32,12 +36,6 @@
         <dd>
             <div *ngIf="talk.conversation">
                 <a [routerLink]="['/conversation', talk.conversation?.id]">{{talk.conversation?.id}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="justraduireApp.talk.translation">Translation</span></dt>
-        <dd>
-            <div *ngIf="talk.translation">
-                <a [routerLink]="['/talk', talk.translation?.id]">{{talk.translation?.id}}</a>
             </div>
         </dd>
     </dl>

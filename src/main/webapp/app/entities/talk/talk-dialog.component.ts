@@ -21,8 +21,6 @@ export class TalkDialogComponent implements OnInit {
     isSaving: boolean;
 
     conversations: Conversation[];
-
-    translations: Talk[];
     dateDp: any;
     serverDateDp: any;
 
@@ -39,19 +37,6 @@ export class TalkDialogComponent implements OnInit {
         this.isSaving = false;
         this.conversationService.query()
             .subscribe((res: HttpResponse<Conversation[]>) => { this.conversations = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.talkService
-            .query({filter: 'talk-is-null'})
-            .subscribe((res: HttpResponse<Talk[]>) => {
-                if (!this.talk.translation || !this.talk.translation.id) {
-                    this.translations = res.body;
-                } else {
-                    this.talkService
-                        .find(this.talk.translation.id)
-                        .subscribe((subRes: HttpResponse<Talk>) => {
-                            this.translations = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -89,10 +74,6 @@ export class TalkDialogComponent implements OnInit {
     }
 
     trackConversationById(index: number, item: Conversation) {
-        return item.id;
-    }
-
-    trackTalkById(index: number, item: Talk) {
         return item.id;
     }
 }

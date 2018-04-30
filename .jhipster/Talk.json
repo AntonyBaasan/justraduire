@@ -6,28 +6,24 @@
             "otherEntityName": "conversation",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "translation",
-            "otherEntityName": "talk",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "talk"
         }
     ],
     "fields": [
         {
-            "fieldName": "text",
+            "fieldName": "sourceText",
             "fieldType": "String"
         },
         {
-            "fieldName": "language",
+            "fieldName": "targetText",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sourceLanguage",
             "fieldType": "Language",
             "fieldValues": "FRENCH,ENGLISH"
         },
         {
-            "fieldName": "toLanguage",
+            "fieldName": "targetLanguage",
             "fieldType": "Language",
             "fieldValues": "FRENCH,ENGLISH"
         },

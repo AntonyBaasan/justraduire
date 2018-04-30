@@ -17,34 +17,30 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="justraduireApp.talk.text">Text</span></th>
-            <th><span jhiTranslate="justraduireApp.talk.language">Language</span></th>
-            <th><span jhiTranslate="justraduireApp.talk.toLanguage">To Language</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.sourceText">Source Text</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.targetText">Target Text</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.sourceLanguage">Source Language</span></th>
+            <th><span jhiTranslate="justraduireApp.talk.targetLanguage">Target Language</span></th>
             <th><span jhiTranslate="justraduireApp.talk.date">Date</span></th>
             <th><span jhiTranslate="justraduireApp.talk.serverDate">Server Date</span></th>
             <th><span jhiTranslate="justraduireApp.talk.type">Type</span></th>
             <th><span jhiTranslate="justraduireApp.talk.conversation">Conversation</span></th>
-            <th><span jhiTranslate="justraduireApp.talk.translation">Translation</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let talk of talks ;trackBy: trackId">
                 <td><a [routerLink]="['../talk', talk.id ]">{{talk.id}}</a></td>
-                <td>{{talk.text}}</td>
-                <td jhiTranslate="{{'justraduireApp.Language.' + talk.language}}">{{talk.language}}</td>
-                <td jhiTranslate="{{'justraduireApp.Language.' + talk.toLanguage}}">{{talk.toLanguage}}</td>
+                <td>{{talk.sourceText}}</td>
+                <td>{{talk.targetText}}</td>
+                <td jhiTranslate="{{'justraduireApp.Language.' + talk.sourceLanguage}}">{{talk.sourceLanguage}}</td>
+                <td jhiTranslate="{{'justraduireApp.Language.' + talk.targetLanguage}}">{{talk.targetLanguage}}</td>
                 <td>{{talk.date | date:'mediumDate'}}</td>
                 <td>{{talk.serverDate | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'justraduireApp.TalkType.' + talk.type}}">{{talk.type}}</td>
                 <td>
                     <div *ngIf="talk.conversation">
                         <a [routerLink]="['../conversation', talk.conversation?.id ]" >{{talk.conversation?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="talk.translation">
-                        <a [routerLink]="['../talk', talk.translation?.id ]" >{{talk.translation?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

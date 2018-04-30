@@ -33,17 +33,18 @@ describe('Talk e2e test', () => {
 
     it('should create and save Talks', () => {
         talkComponentsPage.clickOnCreateButton();
-        talkDialogPage.setTextInput('text');
-        expect(talkDialogPage.getTextInput()).toMatch('text');
-        talkDialogPage.languageSelectLastOption();
-        talkDialogPage.toLanguageSelectLastOption();
+        talkDialogPage.setSourceTextInput('sourceText');
+        expect(talkDialogPage.getSourceTextInput()).toMatch('sourceText');
+        talkDialogPage.setTargetTextInput('targetText');
+        expect(talkDialogPage.getTargetTextInput()).toMatch('targetText');
+        talkDialogPage.sourceLanguageSelectLastOption();
+        talkDialogPage.targetLanguageSelectLastOption();
         talkDialogPage.setDateInput('2000-12-31');
         expect(talkDialogPage.getDateInput()).toMatch('2000-12-31');
         talkDialogPage.setServerDateInput('2000-12-31');
         expect(talkDialogPage.getServerDateInput()).toMatch('2000-12-31');
         talkDialogPage.typeSelectLastOption();
         talkDialogPage.conversationSelectLastOption();
-        talkDialogPage.translationSelectLastOption();
         talkDialogPage.save();
         expect(talkDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -70,48 +71,56 @@ export class TalkDialogPage {
     modalTitle = element(by.css('h4#myTalkLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
-    textInput = element(by.css('input#field_text'));
-    languageSelect = element(by.css('select#field_language'));
-    toLanguageSelect = element(by.css('select#field_toLanguage'));
+    sourceTextInput = element(by.css('input#field_sourceText'));
+    targetTextInput = element(by.css('input#field_targetText'));
+    sourceLanguageSelect = element(by.css('select#field_sourceLanguage'));
+    targetLanguageSelect = element(by.css('select#field_targetLanguage'));
     dateInput = element(by.css('input#field_date'));
     serverDateInput = element(by.css('input#field_serverDate'));
     typeSelect = element(by.css('select#field_type'));
     conversationSelect = element(by.css('select#field_conversation'));
-    translationSelect = element(by.css('select#field_translation'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
 
-    setTextInput = function(text) {
-        this.textInput.sendKeys(text);
+    setSourceTextInput = function(sourceText) {
+        this.sourceTextInput.sendKeys(sourceText);
     };
 
-    getTextInput = function() {
-        return this.textInput.getAttribute('value');
+    getSourceTextInput = function() {
+        return this.sourceTextInput.getAttribute('value');
     };
 
-    setLanguageSelect = function(language) {
-        this.languageSelect.sendKeys(language);
+    setTargetTextInput = function(targetText) {
+        this.targetTextInput.sendKeys(targetText);
     };
 
-    getLanguageSelect = function() {
-        return this.languageSelect.element(by.css('option:checked')).getText();
+    getTargetTextInput = function() {
+        return this.targetTextInput.getAttribute('value');
     };
 
-    languageSelectLastOption = function() {
-        this.languageSelect.all(by.tagName('option')).last().click();
-    };
-    setToLanguageSelect = function(toLanguage) {
-        this.toLanguageSelect.sendKeys(toLanguage);
+    setSourceLanguageSelect = function(sourceLanguage) {
+        this.sourceLanguageSelect.sendKeys(sourceLanguage);
     };
 
-    getToLanguageSelect = function() {
-        return this.toLanguageSelect.element(by.css('option:checked')).getText();
+    getSourceLanguageSelect = function() {
+        return this.sourceLanguageSelect.element(by.css('option:checked')).getText();
     };
 
-    toLanguageSelectLastOption = function() {
-        this.toLanguageSelect.all(by.tagName('option')).last().click();
+    sourceLanguageSelectLastOption = function() {
+        this.sourceLanguageSelect.all(by.tagName('option')).last().click();
+    };
+    setTargetLanguageSelect = function(targetLanguage) {
+        this.targetLanguageSelect.sendKeys(targetLanguage);
+    };
+
+    getTargetLanguageSelect = function() {
+        return this.targetLanguageSelect.element(by.css('option:checked')).getText();
+    };
+
+    targetLanguageSelectLastOption = function() {
+        this.targetLanguageSelect.all(by.tagName('option')).last().click();
     };
     setDateInput = function(date) {
         this.dateInput.sendKeys(date);
@@ -154,22 +163,6 @@ export class TalkDialogPage {
 
     getConversationSelectedOption = function() {
         return this.conversationSelect.element(by.css('option:checked')).getText();
-    };
-
-    translationSelectLastOption = function() {
-        this.translationSelect.all(by.tagName('option')).last().click();
-    };
-
-    translationSelectOption = function(option) {
-        this.translationSelect.sendKeys(option);
-    };
-
-    getTranslationSelect = function() {
-        return this.translationSelect;
-    };
-
-    getTranslationSelectedOption = function() {
-        return this.translationSelect.element(by.css('option:checked')).getText();
     };
 
     save() {

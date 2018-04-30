@@ -13,14 +13,14 @@ export const enum TalkType {
 export class Talk implements BaseEntity {
     constructor(
         public id?: number,
-        public text?: string,
-        public language?: Language,
-        public toLanguage?: Language,
+        public sourceText?: string,
+        public targetText?: string,
+        public sourceLanguage?: Language,
+        public targetLanguage?: Language,
         public date?: any,
         public serverDate?: any,
         public type?: TalkType,
         public conversation?: BaseEntity,
-        public translation?: BaseEntity,
     ) {
     }
 }

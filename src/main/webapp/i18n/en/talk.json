@@ -16,14 +16,14 @@
             "detail": {
                 "title": "Talk"
             },
-            "text": "Text",
-            "language": "Language",
-            "toLanguage": "To Language",
+            "sourceText": "Source Text",
+            "targetText": "Target Text",
+            "sourceLanguage": "Source Language",
+            "targetLanguage": "Target Language",
             "date": "Date",
             "serverDate": "Server Date",
             "type": "Type",
-            "conversation": "Conversation",
-            "translation": "Translation"
+            "conversation": "Conversation"
         }
     }
 }

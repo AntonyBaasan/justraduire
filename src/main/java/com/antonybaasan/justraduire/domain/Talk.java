@@ -25,16 +25,19 @@ public class Talk implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "text")
-    private String text;
+    @Column(name = "source_text")
+    private String sourceText;
+
+    @Column(name = "target_text")
+    private String targetText;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "language")
-    private Language language;
+    @Column(name = "source_language")
+    private Language sourceLanguage;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "to_language")
-    private Language toLanguage;
+    @Column(name = "target_language")
+    private Language targetLanguage;
 
     @Column(name = "jhi_date")
     private LocalDate date;
@@ -49,10 +52,6 @@ public class Talk implements Serializable {
     @ManyToOne
     private Conversation conversation;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Talk translation;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -62,43 +61,56 @@ public class Talk implements Serializable {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getSourceText() {
+        return sourceText;
     }
 
-    public Talk text(String text) {
-        this.text = text;
+    public Talk sourceText(String sourceText) {
+        this.sourceText = sourceText;
         return this;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setSourceText(String sourceText) {
+        this.sourceText = sourceText;
     }
 
-    public Language getLanguage() {
-        return language;
+    public String getTargetText() {
+        return targetText;
     }
 
-    public Talk language(Language language) {
-        this.language = language;
+    public Talk targetText(String targetText) {
+        this.targetText = targetText;
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
+    public void setTargetText(String targetText) {
+        this.targetText = targetText;
     }
 
-    public Language getToLanguage() {
-        return toLanguage;
+    public Language getSourceLanguage() {
+        return sourceLanguage;
     }
 
-    public Talk toLanguage(Language toLanguage) {
-        this.toLanguage = toLanguage;
+    public Talk sourceLanguage(Language sourceLanguage) {
+        this.sourceLanguage = sourceLanguage;
         return this;
     }
 
-    public void setToLanguage(Language toLanguage) {
-        this.toLanguage = toLanguage;
+    public void setSourceLanguage(Language sourceLanguage) {
+        this.sourceLanguage = sourceLanguage;
+    }
+
+    public Language getTargetLanguage() {
+        return targetLanguage;
+    }
+
+    public Talk targetLanguage(Language targetLanguage) {
+        this.targetLanguage = targetLanguage;
+        return this;
+    }
+
+    public void setTargetLanguage(Language targetLanguage) {
+        this.targetLanguage = targetLanguage;
     }
 
     public LocalDate getDate() {
@@ -152,19 +164,6 @@ public class Talk implements Serializable {
     public void setConversation(Conversation conversation) {
         this.conversation = conversation;
     }
-
-    public Talk getTranslation() {
-        return translation;
-    }
-
-    public Talk translation(Talk talk) {
-        this.translation = talk;
-        return this;
-    }
-
-    public void setTranslation(Talk talk) {
-        this.translation = talk;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -191,9 +190,10 @@ public class Talk implements Serializable {
     public String toString() {
         return "Talk{" +
             "id=" + getId() +
-            ", text='" + getText() + "'" +
-            ", language='" + getLanguage() + "'" +
-            ", toLanguage='" + getToLanguage() + "'" +
+            ", sourceText='" + getSourceText() + "'" +
+            ", targetText='" + getTargetText() + "'" +
+            ", sourceLanguage='" + getSourceLanguage() + "'" +
+            ", targetLanguage='" + getTargetLanguage() + "'" +
             ", date='" + getDate() + "'" +
             ", serverDate='" + getServerDate() + "'" +
             ", type='" + getType() + "'" +

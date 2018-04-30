@@ -13,20 +13,25 @@
                    [(ngModel)]="talk.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="justraduireApp.talk.text" for="field_text">Text</label>
-            <input type="text" class="form-control" name="text" id="field_text"
-                [(ngModel)]="talk.text" />
+            <label class="form-control-label" jhiTranslate="justraduireApp.talk.sourceText" for="field_sourceText">Source Text</label>
+            <input type="text" class="form-control" name="sourceText" id="field_sourceText"
+                [(ngModel)]="talk.sourceText" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="justraduireApp.talk.language" for="field_language">Language</label>
-            <select class="form-control" name="language" [(ngModel)]="talk.language" id="field_language" >
+            <label class="form-control-label" jhiTranslate="justraduireApp.talk.targetText" for="field_targetText">Target Text</label>
+            <input type="text" class="form-control" name="targetText" id="field_targetText"
+                [(ngModel)]="talk.targetText" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="justraduireApp.talk.sourceLanguage" for="field_sourceLanguage">Source Language</label>
+            <select class="form-control" name="sourceLanguage" [(ngModel)]="talk.sourceLanguage" id="field_sourceLanguage" >
                 <option value="FRENCH">{{'justraduireApp.Language.FRENCH' | translate}}</option>
                 <option value="ENGLISH">{{'justraduireApp.Language.ENGLISH' | translate}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="justraduireApp.talk.toLanguage" for="field_toLanguage">To Language</label>
-            <select class="form-control" name="toLanguage" [(ngModel)]="talk.toLanguage" id="field_toLanguage" >
+            <label class="form-control-label" jhiTranslate="justraduireApp.talk.targetLanguage" for="field_targetLanguage">Target Language</label>
+            <select class="form-control" name="targetLanguage" [(ngModel)]="talk.targetLanguage" id="field_targetLanguage" >
                 <option value="FRENCH">{{'justraduireApp.Language.FRENCH' | translate}}</option>
                 <option value="ENGLISH">{{'justraduireApp.Language.ENGLISH' | translate}}</option>
             </select>
@@ -64,13 +69,6 @@
             <select class="form-control" id="field_conversation" name="conversation" [(ngModel)]="talk.conversation" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="conversationOption.id === talk.conversation?.id ? talk.conversation : conversationOption" *ngFor="let conversationOption of conversations; trackBy: trackConversationById">{{conversationOption.id}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="justraduireApp.talk.translation" for="field_translation">Translation</label>
-            <select class="form-control" id="field_translation" name="translation" [(ngModel)]="talk.translation">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="talkOption.id === talk.translation?.id ? talk.translation : talkOption" *ngFor="let talkOption of translations; trackBy: trackTalkById">{{talkOption.id}}</option>
             </select>
         </div>
     </div>

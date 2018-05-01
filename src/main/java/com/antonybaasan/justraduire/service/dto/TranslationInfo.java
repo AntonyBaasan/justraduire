@@ -1,4 +1,4 @@
-package com.antonybaasan.justraduire.domain;
+package com.antonybaasan.justraduire.service.dto;
 
 import com.antonybaasan.justraduire.domain.enumeration.Language;
 

@@ -34,11 +34,6 @@
         {
             "fieldName": "serverDate",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "type",
-            "fieldType": "TalkType",
-            "fieldValues": "SPEECH,TRANSLATION"
         }
     ],
     "changelogDate": "20180424204118",

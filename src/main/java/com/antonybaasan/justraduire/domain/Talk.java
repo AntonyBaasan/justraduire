@@ -9,8 +9,6 @@ import java.util.Objects;
 
 import com.antonybaasan.justraduire.domain.enumeration.Language;
 
-import com.antonybaasan.justraduire.domain.enumeration.TalkType;
-
 /**
  * A Talk.
  */
@@ -44,10 +42,6 @@ public class Talk implements Serializable {
 
     @Column(name = "server_date")
     private LocalDate serverDate;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "jhi_type")
-    private TalkType type;
 
     @ManyToOne
     private Conversation conversation;
@@ -139,19 +133,6 @@ public class Talk implements Serializable {
         this.serverDate = serverDate;
     }
 
-    public TalkType getType() {
-        return type;
-    }
-
-    public Talk type(TalkType type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(TalkType type) {
-        this.type = type;
-    }
-
     public Conversation getConversation() {
         return conversation;
     }
@@ -196,7 +177,6 @@ public class Talk implements Serializable {
             ", targetLanguage='" + getTargetLanguage() + "'" +
             ", date='" + getDate() + "'" +
             ", serverDate='" + getServerDate() + "'" +
-            ", type='" + getType() + "'" +
             "}";
     }
 }

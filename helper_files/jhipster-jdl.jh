@@ -11,15 +11,10 @@ entity Talk {
     targetLanguage Language,
     date LocalDate,
     serverDate LocalDate,
-    type TalkType
 }
 
 enum Language {
     FRENCH, ENGLISH
-}
-
-enum TalkType {
-    SPEECH, TRANSLATION
 }
 
 relationship OneToMany {

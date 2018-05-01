@@ -28,10 +28,6 @@
         <dd>
             <span>{{talk.serverDate | date:'mediumDate'}}</span>
         </dd>
-        <dt><span jhiTranslate="justraduireApp.talk.type">Type</span></dt>
-        <dd>
-            <span jhiTranslate="{{'justraduireApp.TalkType.' + talk.type}}">{{talk.type}}</span>
-        </dd>
         <dt><span jhiTranslate="justraduireApp.talk.conversation">Conversation</span></dt>
         <dd>
             <div *ngIf="talk.conversation">

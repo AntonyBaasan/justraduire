@@ -43,7 +43,6 @@ describe('Talk e2e test', () => {
         expect(talkDialogPage.getDateInput()).toMatch('2000-12-31');
         talkDialogPage.setServerDateInput('2000-12-31');
         expect(talkDialogPage.getServerDateInput()).toMatch('2000-12-31');
-        talkDialogPage.typeSelectLastOption();
         talkDialogPage.conversationSelectLastOption();
         talkDialogPage.save();
         expect(talkDialogPage.getSaveButton().isPresent()).toBeFalsy();
@@ -77,7 +76,6 @@ export class TalkDialogPage {
     targetLanguageSelect = element(by.css('select#field_targetLanguage'));
     dateInput = element(by.css('input#field_date'));
     serverDateInput = element(by.css('input#field_serverDate'));
-    typeSelect = element(by.css('select#field_type'));
     conversationSelect = element(by.css('select#field_conversation'));
 
     getModalTitle() {
@@ -138,17 +136,6 @@ export class TalkDialogPage {
         return this.serverDateInput.getAttribute('value');
     };
 
-    setTypeSelect = function(type) {
-        this.typeSelect.sendKeys(type);
-    };
-
-    getTypeSelect = function() {
-        return this.typeSelect.element(by.css('option:checked')).getText();
-    };
-
-    typeSelectLastOption = function() {
-        this.typeSelect.all(by.tagName('option')).last().click();
-    };
     conversationSelectLastOption = function() {
         this.conversationSelect.all(by.tagName('option')).last().click();
     };

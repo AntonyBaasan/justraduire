@@ -33,7 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.antonybaasan.justraduire.domain.enumeration.Language;
 import com.antonybaasan.justraduire.domain.enumeration.Language;
-import com.antonybaasan.justraduire.domain.enumeration.TalkType;
 /**
  * Test class for the TalkResource REST controller.
  *
@@ -60,9 +59,6 @@ public class TalkResourceIntTest {
 
     private static final LocalDate DEFAULT_SERVER_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_SERVER_DATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final TalkType DEFAULT_TYPE = TalkType.SPEECH;
-    private static final TalkType UPDATED_TYPE = TalkType.TRANSLATION;
 
     @Autowired
     private TalkRepository talkRepository;
@@ -107,8 +103,7 @@ public class TalkResourceIntTest {
             .sourceLanguage(DEFAULT_SOURCE_LANGUAGE)
             .targetLanguage(DEFAULT_TARGET_LANGUAGE)
             .date(DEFAULT_DATE)
-            .serverDate(DEFAULT_SERVER_DATE)
-            .type(DEFAULT_TYPE);
+            .serverDate(DEFAULT_SERVER_DATE);
         return talk;
     }
 
@@ -138,7 +133,6 @@ public class TalkResourceIntTest {
         assertThat(testTalk.getTargetLanguage()).isEqualTo(DEFAULT_TARGET_LANGUAGE);
         assertThat(testTalk.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testTalk.getServerDate()).isEqualTo(DEFAULT_SERVER_DATE);
-        assertThat(testTalk.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -176,8 +170,7 @@ public class TalkResourceIntTest {
             .andExpect(jsonPath("$.[*].sourceLanguage").value(hasItem(DEFAULT_SOURCE_LANGUAGE.toString())))
             .andExpect(jsonPath("$.[*].targetLanguage").value(hasItem(DEFAULT_TARGET_LANGUAGE.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].serverDate").value(hasItem(DEFAULT_SERVER_DATE.toString())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].serverDate").value(hasItem(DEFAULT_SERVER_DATE.toString())));
     }
 
     @Test
@@ -196,8 +189,7 @@ public class TalkResourceIntTest {
             .andExpect(jsonPath("$.sourceLanguage").value(DEFAULT_SOURCE_LANGUAGE.toString()))
             .andExpect(jsonPath("$.targetLanguage").value(DEFAULT_TARGET_LANGUAGE.toString()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.serverDate").value(DEFAULT_SERVER_DATE.toString()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
+            .andExpect(jsonPath("$.serverDate").value(DEFAULT_SERVER_DATE.toString()));
     }
 
     @Test
@@ -225,8 +217,7 @@ public class TalkResourceIntTest {
             .sourceLanguage(UPDATED_SOURCE_LANGUAGE)
             .targetLanguage(UPDATED_TARGET_LANGUAGE)
             .date(UPDATED_DATE)
-            .serverDate(UPDATED_SERVER_DATE)
-            .type(UPDATED_TYPE);
+            .serverDate(UPDATED_SERVER_DATE);
 
         restTalkMockMvc.perform(put("/api/talks")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -243,7 +234,6 @@ public class TalkResourceIntTest {
         assertThat(testTalk.getTargetLanguage()).isEqualTo(UPDATED_TARGET_LANGUAGE);
         assertThat(testTalk.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testTalk.getServerDate()).isEqualTo(UPDATED_SERVER_DATE);
-        assertThat(testTalk.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test

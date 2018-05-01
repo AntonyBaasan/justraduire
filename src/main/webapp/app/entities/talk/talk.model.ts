@@ -5,11 +5,6 @@ export const enum Language {
     'ENGLISH'
 }
 
-export const enum TalkType {
-    'SPEECH',
-    'TRANSLATION'
-}
-
 export class Talk implements BaseEntity {
     constructor(
         public id?: number,
@@ -19,7 +14,6 @@ export class Talk implements BaseEntity {
         public targetLanguage?: Language,
         public date?: any,
         public serverDate?: any,
-        public type?: TalkType,
         public conversation?: BaseEntity,
     ) {
     }

@@ -45,10 +45,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="jhi_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="conversation_id" type="bigint">
                 <constraints nullable="true" />
             </column>

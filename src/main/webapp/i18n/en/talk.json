@@ -22,7 +22,6 @@
             "targetLanguage": "Target Language",
             "date": "Date",
             "serverDate": "Server Date",
-            "type": "Type",
             "conversation": "Conversation"
         }
     }

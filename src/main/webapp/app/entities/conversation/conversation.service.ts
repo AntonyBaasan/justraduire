@@ -7,13 +7,14 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Conversation } from './conversation.model';
 import { createRequestOption } from '../../shared';
+import { Talk } from '../talk';
 
 export type EntityResponseType = HttpResponse<Conversation>;
 
 @Injectable()
 export class ConversationService {
 
-    private resourceUrl =  SERVER_API_URL + 'api/conversations';
+    private resourceUrl = SERVER_API_URL + 'api/conversations';
 
     constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
 
@@ -30,7 +31,7 @@ export class ConversationService {
     }
 
     find(id: number): Observable<EntityResponseType> {
-        return this.http.get<Conversation>(`${this.resourceUrl}/${id}`, { observe: 'response'})
+        return this.http.get<Conversation>(`${this.resourceUrl}/${id}`, { observe: 'response' })
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
@@ -41,12 +42,18 @@ export class ConversationService {
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
+    getConversationTalks(id: number): Observable<HttpResponse<Talk[]>> {
+        const options = createRequestOption(id);
+        return this.http.get<Talk[]>(this.resourceUrl + '/' + id + '/talks', { params: options, observe: 'response' })
+            .map((res: HttpResponse<Talk[]>) => this.convertTalkArrayResponse(res));
     }
 
     private convertResponse(res: EntityResponseType): EntityResponseType {
         const body: Conversation = this.convertItemFromServer(res.body);
-        return res.clone({body});
+        return res.clone({ body });
     }
 
     private convertArrayResponse(res: HttpResponse<Conversation[]>): HttpResponse<Conversation[]> {
@@ -55,7 +62,16 @@ export class ConversationService {
         for (let i = 0; i < jsonResponse.length; i++) {
             body.push(this.convertItemFromServer(jsonResponse[i]));
         }
-        return res.clone({body});
+        return res.clone({ body });
+    }
+
+    private convertTalkArrayResponse(res: HttpResponse<Talk[]>): HttpResponse<Talk[]> {
+        const jsonResponse: Talk[] = res.body;
+        const body: Talk[] = [];
+        for (let i = 0; i < jsonResponse.length; i++) {
+            body.push(this.convertItemFromServer(jsonResponse[i]));
+        }
+        return res.clone({ body });
     }
 
     /**

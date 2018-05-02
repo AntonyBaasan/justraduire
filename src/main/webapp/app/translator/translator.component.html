@@ -1,11 +1,16 @@
 <form class="example-form">
+  
   <div id="translation-result">
-    Result
-  </div>
+    <li *ngFor="let t of talkHistory">
+      {{ t.sourceText }} || {{ t.targetText }}
+    </li>
+    </div>
+
     
-  <mat-form-field>
-    <input matInput placeholder="Favorite food" value="Sushi">
+  <mat-form-field (keydown)="keyDown($event)">
+    <input matInput name="text-input" placeholder="Insert text" [(ngModel)]="inputText">
   </mat-form-field>
+  {{inputText}}
 
 </form>
  

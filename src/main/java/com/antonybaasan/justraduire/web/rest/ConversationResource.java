@@ -1,5 +1,6 @@
 package com.antonybaasan.justraduire.web.rest;
 
+import com.antonybaasan.justraduire.domain.Talk;
 import com.codahale.metrics.annotation.Timed;
 import com.antonybaasan.justraduire.domain.Conversation;
 
@@ -10,11 +11,13 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,7 +90,7 @@ public class ConversationResource {
     public List<Conversation> getAllConversations() {
         log.debug("REST request to get all Conversations");
         return conversationRepository.findAll();
-        }
+    }
 
     /**
      * GET  /conversations/:id : get the "id" conversation.
@@ -116,4 +119,25 @@ public class ConversationResource {
         conversationRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    /**
+     * GET  /conversations/:id : get the "id" conversation.
+     *
+     * @param id the id of the conversation to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the conversation, or with status 404 (Not Found)
+     */
+    @GetMapping("/conversations/{id}/talks")
+    @Timed
+    @Transactional // fix lazy loading issue
+    public ResponseEntity<List<Talk>> getConversationTalks(@PathVariable Long id) {
+        log.debug("REST request to get Conversation : {}", id);
+        Conversation conversation = conversationRepository.findOne(id);
+
+        List<Talk> result = null;
+        if (conversation != null)
+            result = new ArrayList(conversation.getTalks());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
 }

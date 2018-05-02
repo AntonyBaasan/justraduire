@@ -3,6 +3,7 @@ package com.antonybaasan.justraduire.web.rest;
 import com.antonybaasan.justraduire.JustraduireApp;
 
 import com.antonybaasan.justraduire.domain.Conversation;
+import com.antonybaasan.justraduire.domain.Talk;
 import com.antonybaasan.justraduire.repository.ConversationRepository;
 import com.antonybaasan.justraduire.web.rest.errors.ExceptionTranslator;
 
@@ -23,7 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.antonybaasan.justraduire.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -81,7 +84,7 @@ public class ConversationResourceIntTest {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -174,6 +177,29 @@ public class ConversationResourceIntTest {
     public void getNonExistingConversation() throws Exception {
         // Get the conversation
         restConversationMockMvc.perform(get("/api/conversations/{id}", Long.MAX_VALUE))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Transactional
+    public void getTalkOfAConversation() throws Exception {
+        Set<Talk> talks = new HashSet<>();
+        talks.add(new Talk());
+        talks.add(new Talk());
+        conversation.setTalks(talks);
+        conversationRepository.saveAndFlush(conversation);
+
+        Long id = conversation.getId();
+        // Get the conversation
+        restConversationMockMvc.perform(get("/api/conversations/{id}/talks", id))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    @Transactional
+    public void getTalkFromNonExistingConversation() throws Exception {
+        // Get the conversation
+        restConversationMockMvc.perform(get("/api/conversations/{id}/Talks", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
     }
 

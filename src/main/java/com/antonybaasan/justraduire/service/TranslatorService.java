@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class TranslatorService {
 
-    public String translate(TranslationInfo translationInfo){
-        String translation = "\"" + translationInfo.getSourceText() +"\" is translated!!";
+    public TranslationInfo translate(TranslationInfo translationInfo){
+        String translation =  translationInfo.getSourceText() +" is translated!!";
 
-        return translation;
+        translationInfo.setTargetText(translation);
+        return translationInfo;
     }
 }

@@ -22,7 +22,7 @@ public class TranslatorResource {
     }
 
     @RequestMapping("/translate")
-    public String translate(@RequestBody TranslationInfo translationInfo) {
+    public TranslationInfo translate(@RequestBody TranslationInfo translationInfo) {
         log.debug("REST request to save Translator : {}", translationInfo);
 
         return translatorService.translate(translationInfo);

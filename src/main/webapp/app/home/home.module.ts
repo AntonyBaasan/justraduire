@@ -8,7 +8,7 @@ import { JustraduireSharedModule } from '../shared';
 
 import { HOME_ROUTE, HomeComponent } from './';
 
-import { TranslatorComponent } from '../translator';
+import { TranslatorComponent, TranslatorService } from '../translator';
 
 @NgModule({
     imports: [
@@ -26,6 +26,7 @@ import { TranslatorComponent } from '../translator';
     entryComponents: [
     ],
     providers: [
+        TranslatorService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

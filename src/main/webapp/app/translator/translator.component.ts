@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { JhiDateUtils } from 'ng-jhipster';
 
-import { TalkService, Talk, Language } from '../entities/talk';
+import { TalkService, Talk } from '../entities/talk';
 import { Conversation, ConversationService } from '../entities/conversation';
-import { LANGUAGES } from '../shared';
+import { LANGUAGES, Language } from '../shared';
 import { HttpResponse } from '@angular/common/http';
+import { TranslatorService } from './translator.service';
 
 @Component({
     selector: 'jhi-translator',
@@ -20,7 +22,9 @@ export class TranslatorComponent implements OnInit {
     talkHistory = [];
 
     constructor(private talkService: TalkService,
-        private conversationService: ConversationService) { }
+        private conversationService: ConversationService,
+        private translatorService: TranslatorService,
+        private jhiDateUtils: JhiDateUtils) { }
 
     ngOnInit() {
         this.getPreviousTalkHistory();
@@ -49,7 +53,7 @@ export class TranslatorComponent implements OnInit {
             sourceText: this.inputText,
             sourceLanguage: this.sourceLanguage,
             targetLanguage: this.targetLanguage,
-            date: this.getCurrentDate(),
+            date: this.ConvertJsDateToJhipster(new Date()),
             conversation: this.conversation
         };
 
@@ -61,8 +65,7 @@ export class TranslatorComponent implements OnInit {
             );
     }
 
-    private getCurrentDate(): any {
-        const date = new Date();
+    private ConvertJsDateToJhipster(date: any): any {
         return {
             day: date.getDay(),
             month: date.getMonth(),
@@ -71,8 +74,19 @@ export class TranslatorComponent implements OnInit {
     }
 
     onSaveSuccess(response: HttpResponse<Talk>) {
-        this.talkHistory.push(response.body);
+        const savedTalk = response.body;
+        this.talkHistory.push(savedTalk);
         console.log('Save success: ', JSON.stringify(response));
+
+        this.translatorService.translate({
+            sourceText: savedTalk.sourceText,
+            sourceLanguage: savedTalk.sourceLanguage,
+            targetLanguage: savedTalk.targetLanguage
+        }).subscribe((translationResponse) => {
+            savedTalk.targetText = translationResponse.body.targetText;
+            savedTalk.date = this.ConvertJsDateToJhipster(savedTalk.date);
+            this.talkService.update(savedTalk);
+        });
     }
 
     onSaveError(response) {

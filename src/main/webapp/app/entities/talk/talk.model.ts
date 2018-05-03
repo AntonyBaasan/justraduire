@@ -1,9 +1,4 @@
-import { BaseEntity } from './../../shared';
-
-export const enum Language {
-    'FRENCH',
-    'ENGLISH'
-}
+import { BaseEntity, Language } from './../../shared';
 
 export class Talk implements BaseEntity {
     constructor(

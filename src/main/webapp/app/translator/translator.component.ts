@@ -57,6 +57,19 @@ export class TranslatorComponent implements OnInit {
             conversation: this.conversation
         };
 
+        this.translatorService.translate({
+            sourceText: talk.sourceText,
+            sourceLanguage: talk.sourceLanguage,
+            targetLanguage: talk.targetLanguage
+        }).subscribe((translationResponse) => {
+            talk.targetText = translationResponse.body.targetText;
+            this.saveTalk(talk);
+        }, () => {
+            this.saveTalk(talk);
+        });
+    }
+
+    private saveTalk(talk) {
         this.talkService
             .create(talk)
             .subscribe(
@@ -78,15 +91,6 @@ export class TranslatorComponent implements OnInit {
         this.talkHistory.push(savedTalk);
         console.log('Save success: ', JSON.stringify(response));
 
-        this.translatorService.translate({
-            sourceText: savedTalk.sourceText,
-            sourceLanguage: savedTalk.sourceLanguage,
-            targetLanguage: savedTalk.targetLanguage
-        }).subscribe((translationResponse) => {
-            savedTalk.targetText = translationResponse.body.targetText;
-            savedTalk.date = this.ConvertJsDateToJhipster(savedTalk.date);
-            this.talkService.update(savedTalk);
-        });
     }
 
     onSaveError(response) {

@@ -18,6 +18,9 @@ export class TranslatorComponent implements OnInit {
     inputText = '';
     sourceLanguage: Language = Language.ENGLISH;
     targetLanguage: Language = Language.FRENCH;
+    workMode: 'chatMode' | 'translatorMode' = 'chatMode';
+    availableLanguages: Language[] = [Language.ENGLISH, Language.FRENCH];
+    currentLanguage: Language = Language.ENGLISH;
 
     talkHistory = [];
 
@@ -40,11 +43,13 @@ export class TranslatorComponent implements OnInit {
     }
 
     keyDown(event) {
-        if (event.keyCode === 13) {
-            if (this.inputText) {
-                this.handleInputText();
-                this.inputText = '';
-            }
+        if (event.keyCode !== 13) {
+            return;
+        }
+
+        if (this.inputText) {
+            this.handleInputText();
+            this.inputText = '';
         }
     }
 
@@ -84,6 +89,12 @@ export class TranslatorComponent implements OnInit {
             month: date.getMonth(),
             year: date.getMonth()
         };
+    }
+
+    convertLanguageToString(l: Language) {
+        if (l === Language.ENGLISH) { return 'Eng'; }
+        if (l === Language.FRENCH) { return 'Fre'; }
+        return 'Unknown';
     }
 
     onSaveSuccess(response: HttpResponse<Talk>) {

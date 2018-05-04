@@ -1,16 +1,26 @@
 <form class="example-form">
-  
+  <mat-radio-group [(ngModel)]="workMode" name='workMode'>
+    <mat-radio-button value="chatMode">Chat mode</mat-radio-button>
+    <mat-radio-button value="translatorMode">Translator mode</mat-radio-button>
+  </mat-radio-group>
+
   <div id="translation-result">
     <li *ngFor="let t of talkHistory">
       {{ t.sourceText }} || {{ t.targetText }}
     </li>
-    </div>
+  </div>
 
-    
+  <mat-radio-group [(ngModel)]="currentLanguage" name='currentLanguage'>
+    <mat-radio-button *ngFor="let l of availableLanguages" [value]="l">
+      {{convertLanguageToString(l)}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <br/> 
+
   <mat-form-field (keydown)="keyDown($event)">
     <input matInput name="text-input" placeholder="Insert text" [(ngModel)]="inputText">
   </mat-form-field>
-  {{inputText}}
+  <br/> 
+  {{currentLanguage}}
 
 </form>
- 

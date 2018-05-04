@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { JustraduireSharedModule } from '../shared';
 
@@ -18,6 +19,7 @@ import { TranslatorComponent, TranslatorService } from '../translator';
         MatButtonModule,
         MatCheckboxModule,
         MatInputModule,
+        MatRadioModule
     ],
     declarations: [
         HomeComponent,

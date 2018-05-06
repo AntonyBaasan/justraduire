@@ -19,7 +19,6 @@ export class TranslatorComponent implements OnInit {
     inputText = '';
     sourceLanguage: Language = Language.ENGLISH;
     targetLanguage: Language = Language.FRENCH;
-    workMode: 'chatMode' | 'translatorMode' = 'chatMode';
     availableLanguages: Language[] = [Language.ENGLISH, Language.FRENCH];
     currentLanguage: Language = Language.ENGLISH;
 

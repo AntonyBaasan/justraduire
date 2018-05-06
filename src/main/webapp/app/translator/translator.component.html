@@ -1,15 +1,11 @@
 <form class="example-form">
   <div *ngFor="let c of allConversations">
     <button (click)="selectConversation(c)">{{c.id}}
-      <a [hidden]="conversation !== c">*</a></button>
+      <a [hidden]="conversation !== c">*</a>
+    </button>
   </div>
   <br/>
   <div *ngIf="conversation">
-    <mat-radio-group [(ngModel)]="workMode" name='workMode'>
-      <mat-radio-button value="chatMode">Chat mode</mat-radio-button>
-      <mat-radio-button value="translatorMode">Translator mode</mat-radio-button>
-    </mat-radio-group>
-
     <div id="translation-result">
       <li *ngFor="let t of conversation.talks">
         {{ t.sourceText }} || {{ t.targetText }}

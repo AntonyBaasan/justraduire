@@ -64,7 +64,7 @@ export class TranslatorComponent implements OnInit {
             return;
         }
 
-        if (this.inputText) {
+        if (this.inputText && this.inputText.trim() !== '') {
             this.handleInputText();
             this.inputText = '';
         }
@@ -74,7 +74,7 @@ export class TranslatorComponent implements OnInit {
 
     handleInputText() {
         const talk: Talk = {
-            sourceText: this.inputText,
+            sourceText: this.inputText.trim(),
             sourceLanguage: this.sourceLanguage,
             targetLanguage: this.targetLanguage,
             date: this.ConvertJsDateToJhipster(new Date()),

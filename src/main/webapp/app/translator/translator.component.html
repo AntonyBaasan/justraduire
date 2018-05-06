@@ -1,32 +1,32 @@
 <form class="example-form">
   <div *ngFor="let c of allConversations">
-    <button (click)="selectConversation(c)">{{c.id}}</button>
+    <button (click)="selectConversation(c)">{{c.id}}
+      <a [hidden]="conversation !== c">*</a></button>
   </div>
   <br/>
-  <mat-radio-group [(ngModel)]="workMode" name='workMode'>
-    <mat-radio-button value="chatMode">Chat mode</mat-radio-button>
-    <mat-radio-button value="translatorMode">Translator mode</mat-radio-button>
-  </mat-radio-group>
+  <div *ngIf="conversation">
+    <mat-radio-group [(ngModel)]="workMode" name='workMode'>
+      <mat-radio-button value="chatMode">Chat mode</mat-radio-button>
+      <mat-radio-button value="translatorMode">Translator mode</mat-radio-button>
+    </mat-radio-group>
 
-  <div id="translation-result">
-    <li *ngFor="let t of talkHistory">
-      {{ t.sourceText }} || {{ t.targetText }}
-    </li>
-  </div>
+    <div id="translation-result">
+      <li *ngFor="let t of conversation.talks">
+        {{ t.sourceText }} || {{ t.targetText }}
+      </li>
+    </div>
 
-  <mat-radio-group [(ngModel)]="currentLanguage" name='currentLanguage'>
-    <mat-radio-button *ngFor="let l of availableLanguages" [value]="l">
-      {{convertLanguageToString(l)}}
-    </mat-radio-button>
-  </mat-radio-group>
-  <br/>
+    <mat-radio-group [(ngModel)]="currentLanguage" name='currentLanguage'>
+      <mat-radio-button *ngFor="let conv of availableLanguages" [value]="conv">
+        {{convertLanguageToString(conv)}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <br/>
 
-  <mat-form-field (keydown)="keyDown($event)">
-    <input matInput name="text-input" placeholder="Insert text" [(ngModel)]="inputText">
-  </mat-form-field>
-  <br/>
-  <div [hidden]="!conversation">
-    {{conversation.id}}
+    <mat-form-field (keydown)="keyDown($event)">
+      <input matInput name="text-input" placeholder="Insert text" [(ngModel)]="inputText">
+    </mat-form-field>
+
   </div>
 
 </form>

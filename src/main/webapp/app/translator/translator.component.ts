@@ -23,8 +23,6 @@ export class TranslatorComponent implements OnInit {
     availableLanguages: Language[] = [Language.ENGLISH, Language.FRENCH];
     currentLanguage: Language = Language.ENGLISH;
 
-    talkHistory = [];
-
     constructor(private talkService: TalkService,
         private conversationService: ConversationService,
         private translatorService: TranslatorService,
@@ -49,13 +47,16 @@ export class TranslatorComponent implements OnInit {
         this.conversationService.getConversationTalks(this.conversation.id).subscribe(
             (response) => {
                 const talks = response.body;
-                this.talkHistory = this.talkHistory.concat(talks);
+                this.conversation.talks = talks;
             }
         );
     }
 
     selectConversation(conversation: Conversation) {
-        this.conversation = conversation;
+        if (this.conversation !== conversation) {
+            this.conversation = conversation;
+            this.updateTalkHistory(this.conversation);
+        }
     }
 
     keyDown(event) {
@@ -67,6 +68,8 @@ export class TranslatorComponent implements OnInit {
             this.handleInputText();
             this.inputText = '';
         }
+
+        event.preventDefault();
     }
 
     handleInputText() {
@@ -115,7 +118,7 @@ export class TranslatorComponent implements OnInit {
 
     onSaveSuccess(response: HttpResponse<Talk>) {
         const savedTalk = response.body;
-        this.talkHistory.push(savedTalk);
+        this.conversation.talks.push(savedTalk);
         console.log('Save success: ', JSON.stringify(response));
 
     }

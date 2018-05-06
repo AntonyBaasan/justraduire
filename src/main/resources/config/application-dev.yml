@@ -44,8 +44,8 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-#            hibernate.hbm2ddl.auto: update
-#            hibernate.hbm2ddl.auto: create-drop
+            # hibernate.hbm2ddl.auto: update
+            # hibernate.hbm2ddl.auto: create-drop
     mail:
         host: localhost
         port: 25

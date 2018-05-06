@@ -14,7 +14,8 @@ import { TranslatorService } from './translator.service';
     styleUrls: ['translator.css']
 })
 export class TranslatorComponent implements OnInit {
-    conversation: Conversation = { id: 1251 };
+    allConversations: Conversation[] = [{ id: 1251 }];
+    conversation: Conversation;
     inputText = '';
     sourceLanguage: Language = Language.ENGLISH;
     targetLanguage: Language = Language.FRENCH;
@@ -30,16 +31,31 @@ export class TranslatorComponent implements OnInit {
         private jhiDateUtils: JhiDateUtils) { }
 
     ngOnInit() {
-        this.getPreviousTalkHistory();
+        this.getAllConversations();
+        this.updateTalkHistory(this.conversation);
     }
 
-    getPreviousTalkHistory() {
+    getAllConversations() {
+        this.conversationService.query().subscribe((response) => {
+            this.allConversations = response.body;
+        }, () => { });
+    }
+
+    updateTalkHistory(conversation: Conversation) {
+        if (!conversation) {
+            return;
+        }
+
         this.conversationService.getConversationTalks(this.conversation.id).subscribe(
             (response) => {
                 const talks = response.body;
                 this.talkHistory = this.talkHistory.concat(talks);
             }
         );
+    }
+
+    selectConversation(conversation: Conversation) {
+        this.conversation = conversation;
     }
 
     keyDown(event) {

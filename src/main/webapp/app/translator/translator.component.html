@@ -1,4 +1,8 @@
 <form class="example-form">
+  <div *ngFor="let c of allConversations">
+    <button (click)="selectConversation(c)">{{c.id}}</button>
+  </div>
+  <br/>
   <mat-radio-group [(ngModel)]="workMode" name='workMode'>
     <mat-radio-button value="chatMode">Chat mode</mat-radio-button>
     <mat-radio-button value="translatorMode">Translator mode</mat-radio-button>
@@ -15,12 +19,14 @@
       {{convertLanguageToString(l)}}
     </mat-radio-button>
   </mat-radio-group>
-  <br/> 
+  <br/>
 
   <mat-form-field (keydown)="keyDown($event)">
     <input matInput name="text-input" placeholder="Insert text" [(ngModel)]="inputText">
   </mat-form-field>
-  <br/> 
-  {{currentLanguage}}
+  <br/>
+  <div [hidden]="!conversation">
+    {{conversation.id}}
+  </div>
 
 </form>
